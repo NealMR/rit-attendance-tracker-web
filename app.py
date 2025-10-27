@@ -41,15 +41,17 @@ def convert_to_native_types(data):
 def get_attendance_data(user_id, password):
     """Scrape attendance data and return results"""
     chrome_options = Options()
-    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless=new')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--disable-software-rasterizer')
+    chrome_options.add_argument('--disable-extensions')
+    chrome_options.add_argument('--ignore-certificate-errors')
     
-    # For Render.com deployment
-    chrome_options.binary_location = '/usr/bin/chromium'
-    
+    # Set Chrome binary location for Render
+    chrome_options.binary_location = '/opt/render/project/.render/chrome/opt/google/chrome/chrome'
+
     driver = None
     try:
         driver = webdriver.Chrome(options=chrome_options)
