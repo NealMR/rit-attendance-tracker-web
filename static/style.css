@@ -1,0 +1,557 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --apple-blue: #007AFF;
+    --apple-green: #34C759;
+    --apple-orange: #FF9500;
+    --apple-red: #FF3B30;
+    --apple-gray: #8E8E93;
+    --apple-gray-light: #E5E5EA;
+    --apple-gray-bg: #F2F2F7;
+    --apple-white: #FFFFFF;
+    --apple-text: #000000;
+    --apple-text-secondary: #3C3C43;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--apple-gray-bg);
+    color: var(--apple-text);
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Navbar */
+.navbar {
+    background: var(--apple-white);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--apple-gray-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 40px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--apple-text);
+    letter-spacing: -0.5px;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Login Form */
+.login-form {
+    background: var(--apple-white);
+    border-radius: 20px;
+    padding: 48px;
+    box-shadow: var(--shadow);
+    animation: slideUp 0.4s ease;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--apple-blue) 0%, #5AC8FA 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    margin: 0 auto 20px;
+}
+
+.login-header h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--apple-text);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.login-header p {
+    color: var(--apple-text-secondary);
+    font-size: 1em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--apple-text);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--apple-gray-bg);
+    border: 1px solid var(--apple-gray-light);
+    border-radius: 10px;
+    font-size: 1em;
+    color: var(--apple-text);
+    transition: all 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--apple-blue);
+    background: var(--apple-white);
+}
+
+.form-group input::placeholder {
+    color: var(--apple-gray);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--apple-blue);
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+}
+
+.btn-primary:hover {
+    background: #0051D5;
+    transform: scale(1.01);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 14px;
+    background: var(--apple-gray-bg);
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--apple-blue);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--apple-gray-light);
+}
+
+/* Loading with Realistic Progress */
+/* Loading with Realistic Progress */
+.loading {
+    background: var(--apple-white);
+    border-radius: 20px;
+    padding: 60px 40px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: slideUp 0.4s ease;
+}
+
+.loading-content h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--apple-text);
+    margin-bottom: 32px;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--apple-gray-light);
+    border-top: 3px solid #FF3B30;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 32px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.progress-container {
+    margin: 24px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--apple-gray-light);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF3B30 0%, #FF6961 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.3);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #FF3B30;
+}
+
+.progress-status {
+    color: var(--apple-gray);
+    font-size: 0.9em;
+}
+
+
+/* Results */
+.results {
+    animation: slideUp 0.4s ease;
+}
+
+.page-header {
+    margin-bottom: 24px;
+}
+
+.page-header h2 {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--apple-text);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.page-header p {
+    color: var(--apple-text-secondary);
+    font-size: 1em;
+}
+
+.overall-card {
+    background: linear-gradient(135deg, var(--apple-blue) 0%, #5AC8FA 100%);
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 32px;
+    color: white;
+}
+
+.overall-card h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2.5em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alert-message {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-size: 1em;
+}
+
+/* Subjects Section */
+.subjects-section {
+    margin: 32px 0;
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--apple-text);
+    margin-bottom: 16px;
+}
+
+.subjects-list {
+    display: grid;
+    gap: 12px;
+}
+
+.subject-card {
+    background: var(--apple-white);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid var(--apple-gray-light);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.subject-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.subject-card.warning {
+    border-left: 4px solid var(--apple-orange);
+}
+
+.subject-card.success {
+    border-left: 4px solid var(--apple-green);
+}
+
+.subject-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.subject-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--apple-text);
+}
+
+.subject-percentage {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--apple-blue);
+}
+
+.subject-percentage.warning {
+    color: var(--apple-orange);
+}
+
+.subject-percentage.success {
+    color: var(--apple-green);
+}
+
+.subject-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    color: var(--apple-text-secondary);
+    font-size: 0.9em;
+}
+
+.detail-item strong {
+    color: var(--apple-text);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+/* Error Modal */
+.error-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.error-content {
+    background: var(--apple-white);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.error-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--apple-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    margin: 0 auto 20px;
+}
+
+.error-content h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--apple-text);
+}
+
+.error-content p {
+    font-size: 1em;
+    margin-bottom: 24px;
+    color: var(--apple-text-secondary);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--apple-gray);
+    font-size: 0.9em;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-content {
+        padding: 16px 20px;
+    }
+    
+    .login-form {
+        padding: 32px 24px;
+    }
+    
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+/* Form Error Message */
+.form-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid var(--apple-red);
+    border-radius: 10px;
+    color: var(--apple-red);
+    font-size: 0.9em;
+    margin: 16px 0;
+    animation: slideDown 0.3s ease;
+}
+
+.form-error svg {
+    flex-shrink: 0;
+    color: var(--apple-red);
+}
+
+.form-error span {
+    flex: 1;
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Input field error state */
+.form-group input.error {
+    border-color: var(--apple-red);
+    background: rgba(255, 59, 48, 0.05);
+}
+
+.form-group input.error:focus {
+    border-color: var(--apple-red);
+    box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+}
+
+}
