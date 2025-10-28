@@ -1,99 +1,120 @@
-# 🎓 RIT Attendance Tracker (Flask + Selenium)
+# 🎓 RIT Attendance Tracker Web
 
-A Flask-based web application that scrapes and displays attendance data from the RIT CMS portal using Selenium automation.  
-Includes an **admin dashboard** to monitor logs, system stats, and user sessions in real time.
+A robust Flask-based web application designed to automatically fetch and analyze attendance data from the RIT CMS portal using **Selenium automation**.  
+Includes a password-protected **Admin Dashboard** to monitor user activity, system performance, and real-time logs.
 
 ---
 
-## 🚀 Features
+## 🧭 Overview
 
-- **User Interface** – Simple front-end built with Flask templates.
-- **Attendance Scraper** – Uses Selenium and BeautifulSoup to fetch attendance from multiple RIT CMS URLs.
-- **Live Logging** – Real-time logging of user actions (login, scrape, download).
-- **Admin Dashboard** – Password-protected interface showing:
-  - Real-time server logs (via Server-Sent Events)
-  - Unique user tracking
-  - System stats (CPU, Memory, Disk)
-- **Excel Export** – Download attendance data in `.xlsx` format.
-- **Proxy & Reverse Proxy Support** – Works on Render, Replit, or local servers.
+The **RIT Attendance Tracker** simplifies attendance management for students and administrators by automating the retrieval and visualization of attendance data.  
+It provides detailed analytics, secure user tracking, and a streamlined interface for monitoring activity.
+
+---
+
+## ✨ Key Features
+
+### 🧑‍🎓 Student Portal
+- Securely fetches attendance data directly from RIT CMS.
+- Displays subject-wise attendance summary with total, present, and absent counts.
+- Allows users to **download reports in Excel format**.
+
+### 🛠️ Automation & Scraping
+- Uses **Selenium WebDriver** for browser automation.
+- Parses attendance data with **BeautifulSoup** and **Pandas**.
+- Supports multiple CMS URLs for reliability and fallback.
+
+### 🧩 Admin Dashboard
+- Password-protected admin access.
+- Real-time system stats (CPU, memory, disk).
+- Live log streaming via **Server-Sent Events (SSE)**.
+- Tracks unique users and session history.
+
+### 📊 Logging & Analytics
+- Detailed user activity logs (scrape, download, new user, etc.).
+- Thread-safe, in-memory logging using Python `deque`.
+- Live update view on the admin panel.
 
 ---
 
 ## 🧰 Tech Stack
 
-| Component | Technology |
-|------------|-------------|
-| Backend | Flask (Python) |
-| Web Scraping | Selenium + BeautifulSoup |
-| Data Handling | Pandas, NumPy |
-| Frontend | HTML + Flask Templates |
-| Logging | Python Logging + Thread-safe Queue |
-| Deployment | Works on Render / Replit / Localhost |
+| Category | Technology |
+|-----------|-------------|
+| **Backend** | Flask (Python) |
+| **Web Scraping** | Selenium, BeautifulSoup |
+| **Data Handling** | Pandas, NumPy |
+| **Frontend** | HTML, CSS (Flask Templates) |
+| **System Monitoring** | psutil |
+| **Logging** | Python logging module + LiveLogHandler |
+| **Concurrency** | threading, deque |
+| **File Export** | Excel (.xlsx) via Pandas and XlsxWriter |
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/rit-attendance-tracker.git
-cd rit-attendance-tracker
+git clone https://github.com/NealMR/rit-attendance-tracker-web.git
+cd rit-attendance-tracker-web
 2️⃣ Create a Virtual Environment
 bash
 Copy code
 python -m venv venv
 venv\Scripts\activate   # For Windows
 # or
-source venv/bin/activate  # For macOS/Linux
+source venv/bin/activate   # For macOS/Linux
 3️⃣ Install Dependencies
 bash
 Copy code
 pip install -r requirements.txt
-If you don’t have requirements.txt, create one:
+If you don’t have requirements.txt, generate it:
 
 bash
 Copy code
-pip install flask selenium pandas numpy beautifulsoup4 psutil
+pip install flask selenium pandas numpy beautifulsoup4 psutil xlsxwriter
 pip freeze > requirements.txt
-4️⃣ Run Locally
+4️⃣ Run the Application
 bash
 Copy code
 python app.py
-App runs on:
-👉 http://127.0.0.1:5000
-Admin Dashboard:
-🔐 http://127.0.0.1:5000/admin?password=password
+App will start locally at:
 
-🧩 Folder Structure
-pgsql
+cpp
 Copy code
-rit-attendance-tracker/
+http://127.0.0.1:5000
+🗂️ Project Structure
+csharp
+Copy code
+rit-attendance-tracker-web/
 │
-├── app.py
+├── app.py                     # Main Flask application
 ├── templates/
-│   ├── index.html
-│   └── admin.html
+│   ├── index.html             # User portal
+│   └── admin.html             # Admin dashboard
 ├── static/
-│   ├── style.css
-│   └── script.js
+│   ├── style.css              # Stylesheet
+│   └── script.js              # Frontend interactivity
 ├── requirements.txt
 └── README.md
-🔒 Admin Dashboard
-You can view logs, system stats, and connected users:
+🔒 Security Notes
+The admin dashboard is protected with a password defined in app.py:
 
-/admin?password=password
+python
+Copy code
+ADMIN_PASSWORD = "password"
+🔐 Change this immediately before using in production.
 
-/admin/logs
+All user activities and requests are logged with timestamps and IP addresses.
 
-/admin/stats
+The scraper uses headless Chrome for automation.
 
-/admin/users
-
-To secure your app:
-
-Change ADMIN_PASSWORD in app.py.
-
-
+🧑‍💻 Author
+   NealMR
+ 
 
 🪪 License
-This project is licensed under the MIT License — feel free to use and modify it.
+This project is released under the MIT License.
+You’re free to use, modify, and distribute it with attribution.
+
