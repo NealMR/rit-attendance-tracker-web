@@ -59,40 +59,36 @@ It provides detailed analytics, secure user tracking, and a streamlined interfac
 git clone https://github.com/NealMR/rit-attendance-tracker-web.git
 cd rit-attendance-tracker-web
 ```
-###2️⃣ Create a Virtual Environment
+### 2️⃣ Create a Virtual Environment
 ```bash
-Copy code
+
 python -m venv venv
 venv\Scripts\activate   # For Windows
 # or
 source venv/bin/activate   # For macOS/Linux
 ```
-###3️⃣ Install Dependencies
+### 3️⃣ Install Dependencies
 ```bash
-Copy code
 pip install -r requirements.txt
 If you don’t have requirements.txt, generate it:
 ```
 ```bash
-Copy code
 pip install flask selenium pandas numpy beautifulsoup4 psutil xlsxwriter
 pip freeze > requirements.txt
 ```
-###4️⃣ Run the Application
+### 4️⃣ Run the Application
 ```bash
-Copy code
+
 python app.py
 ```
+
 App will start locally at:
 
-
-Copy code
 ```
 http://127.0.0.1:5000
 ```
 🗂️ Project Structure
-csharp
-Copy code
+```
 rit-attendance-tracker-web/
 │
 ├── app.py                     # Main Flask application
@@ -104,11 +100,11 @@ rit-attendance-tracker-web/
 │   └── script.js              # Frontend interactivity
 ├── requirements.txt
 └── README.md
+```
 🔒 Security Notes
 The admin dashboard is protected with a password defined in app.py:
 
 python
-Copy code
 ```
 ADMIN_PASSWORD = "password"
 ```
