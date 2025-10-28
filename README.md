@@ -58,32 +58,38 @@ It provides detailed analytics, secure user tracking, and a streamlined interfac
 ```bash
 git clone https://github.com/NealMR/rit-attendance-tracker-web.git
 cd rit-attendance-tracker-web
-2️⃣ Create a Virtual Environment
-bash
+```
+###2️⃣ Create a Virtual Environment
+```bash
 Copy code
 python -m venv venv
 venv\Scripts\activate   # For Windows
 # or
 source venv/bin/activate   # For macOS/Linux
-3️⃣ Install Dependencies
-bash
+```
+###3️⃣ Install Dependencies
+```bash
 Copy code
 pip install -r requirements.txt
 If you don’t have requirements.txt, generate it:
-
-bash
+```
+```bash
 Copy code
 pip install flask selenium pandas numpy beautifulsoup4 psutil xlsxwriter
 pip freeze > requirements.txt
-4️⃣ Run the Application
-bash
+```
+###4️⃣ Run the Application
+```bash
 Copy code
 python app.py
+```
 App will start locally at:
 
-cpp
+
 Copy code
+```
 http://127.0.0.1:5000
+```
 🗂️ Project Structure
 csharp
 Copy code
@@ -103,7 +109,9 @@ The admin dashboard is protected with a password defined in app.py:
 
 python
 Copy code
+```
 ADMIN_PASSWORD = "password"
+```
 🔐 Change this immediately before using in production.
 
 All user activities and requests are logged with timestamps and IP addresses.
