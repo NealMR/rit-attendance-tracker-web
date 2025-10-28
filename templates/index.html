@@ -3,85 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIT Attendance</title>
+    <title>RIT Attendance Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <h1 class="logo">RIT Attendance</h1>
+            <div class="logo">Attendance Summary</div>
         </div>
     </nav>
 
     <div class="container">
-        <div class="login-form" id="loginForm">
+        <!-- Login Form -->
+        <div id="loginForm" class="login-form">
             <div class="login-header">
                 <div class="icon-circle">📊</div>
-                <h2>Check Your Attendance</h2>
-                <p>Enter your credentials to view your attendance summary</p>
+                <h2>Attendance Portal</h2>
+                <p>Enter your RIT CMS credentials</p>
             </div>
             <form id="attendanceForm">
                 <div class="form-group">
                     <label for="userId">User ID</label>
-                    <input type="text" id="userId" placeholder="e.g., 2303026" required>
+                    <input type="text" id="userId" name="userId" placeholder="Enter your user ID" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
-                <button type="submit" class="btn-primary">Continue</button>
+                <button type="submit" class="btn-primary">Get Attendance</button>
             </form>
         </div>
 
-        <div class="loading" id="loading" style="display: none;">
+        <!-- Loading State with Realistic Progress -->
+        <div id="loading" class="loading" style="display: none;">
             <div class="loading-content">
+                <h3>Fetching Your Attendance</h3>
                 <div class="spinner"></div>
-                <h3 id="loadingText">Fetching Attendance Data</h3>
                 <div class="progress-container">
-                    <div class="progress-bar" id="progressBar">
-                        <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
                     </div>
-                    <p class="progress-info">
-                        <span class="progress-text" id="progressText">0%</span>
-                        <span class="progress-status" id="progressStatus">Initializing...</span>
-                    </p>
+                    <div class="progress-info">
+                        <span id="progressText" class="progress-text">0%</span>
+                        <span id="progressStatus" class="progress-status">Starting browser...</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="results" id="results" style="display: none;">
+        <!-- Results -->
+        <div id="results" class="results" style="display: none;">
             <div class="page-header">
-                <h2>Attendance Summary</h2>
-                <p>Your current attendance status</p>
+                <h2>Your Attendance Report</h2>
+                <p>Here's a detailed summary of your attendance</p>
             </div>
-            
-            <div class="overall-card" id="overallStats"></div>
-            
-            <div class="subjects-section">
-                <h3 class="section-title">Subjects</h3>
-                <div class="subjects-list" id="subjectsList"></div>
-            </div>
-            
-            <div class="actions">
-                <button id="downloadBtn" class="btn-primary">Download CSV</button>
-                <button id="backBtn" class="btn-secondary">Check Again</button>
-            </div>
-        </div>
 
-        <div class="error-modal" id="error" style="display: none;">
-            <div class="modal-backdrop" onclick="closeError()"></div>
-            <div class="error-content">
-                <div class="error-icon">⚠️</div>
-                <h3>Something went wrong</h3>
-                <p id="errorMessage"></p>
-                <button class="btn-primary" onclick="closeError()">Try Again</button>
+            <div id="overallStats" class="overall-card"></div>
+
+            <div class="subjects-section">
+                <h3 class="section-title">Subject-wise Breakdown</h3>
+                <div id="subjectsList" class="subjects-list"></div>
+            </div>
+
+            <div class="actions">
+                <button onclick="downloadExcel()" class="btn-primary">📥 Download Excel</button>
+                <button onclick="checkAnother()" class="btn-secondary">🔄 Check Another</button>
             </div>
         </div>
     </div>
 
-    <footer class="footer">
-        <p>Made for RIT Students by NealMR</p>
-    </footer>
+    <div class="footer">
+        <p>RIT Attendance Tracker • Made by NealMR</p>
+    </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

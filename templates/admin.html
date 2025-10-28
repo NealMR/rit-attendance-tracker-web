@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Live Logs & Monitoring</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #F6F6F6;
+            color: #000000;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: #000000;
+            padding: 24px 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 4px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #6B6B6B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: -0.02em;
+        }
+
+        /* USER ID LIST SECTION */
+        .userid-section {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .userid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E2E2E2;
+        }
+
+        .userid-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: -0.02em;
+        }
+
+        .userid-count {
+            background: #000000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        #userid-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .userid-badge {
+            background: #F6F6F6;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid #E2E2E2;
+        }
+
+        .userid-badge:hover {
+            background: #000000;
+            color: #FFFFFF;
+        }
+
+        /* USER DETAILS CONTAINER */
+        .users-container {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .users-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E2E2E2;
+        }
+
+        .users-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        #users-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .user-card {
+            background: #F6F6F6;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid #000000;
+            transition: all 0.2s;
+        }
+
+        .user-card:hover {
+            background: #EEEEEE;
+        }
+
+        .user-id {
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .user-info {
+            font-size: 12px;
+            color: #6B6B6B;
+            margin-top: 4px;
+        }
+
+        .logs-container {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 24px;
+            max-height: 70vh;
+            overflow-y: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E2E2E2;
+        }
+
+        .logs-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .log-entry {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            background: #F6F6F6;
+            border-left: 3px solid #E2E2E2;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            animation: slideIn 0.2s ease;
+            line-height: 1.5;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .log-entry.info {
+            border-left-color: #000000;
+        }
+
+        .log-entry.success {
+            border-left-color: #47B275;
+            background: rgba(71, 178, 117, 0.05);
+        }
+
+        .log-entry.error {
+            border-left-color: #E62C2C;
+            background: rgba(230, 44, 44, 0.05);
+        }
+
+        .log-entry.new-user {
+            border-left-color: #FFC043;
+            background: rgba(255, 192, 67, 0.05);
+        }
+
+        .log-timestamp {
+            color: #6B6B6B;
+            margin-right: 10px;
+        }
+
+        .log-message {
+            color: #000000;
+        }
+
+        .clear-btn, .refresh-btn {
+            background: #000000;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .clear-btn:hover, .refresh-btn:hover {
+            background: #333333;
+        }
+
+        .refresh-btn {
+            margin-left: 8px;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #47B275;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F6F6F6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333333;
+        }
+
+        .highlight-user {
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .highlight-ip {
+            color: #6B6B6B;
+            font-weight: 600;
+        }
+
+        .highlight-status {
+            color: #000000;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 20px;
+            }
+
+            .container {
+                padding: 0 16px 32px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #users-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .logs-header, .users-header, .userid-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+        <p><span class="status-indicator"></span>Real-time monitoring active</p>
+    </div>
+
+    <div class="container">
+        <!-- System Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">CPU Usage</div>
+                <div class="stat-value" id="cpu-stat">--%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Memory Usage</div>
+                <div class="stat-value" id="memory-stat">--%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Disk Usage</div>
+                <div class="stat-value" id="disk-stat">--%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Logs</div>
+                <div class="stat-value" id="log-count">0</div>
+            </div>
+        </div>
+
+        <!-- USER ID LIST SECTION -->
+        <div class="userid-section">
+            <div class="userid-header">
+                <h2>All User IDs</h2>
+                <div class="userid-count">
+                    <span id="userid-total">0</span> Users
+                </div>
+            </div>
+            <div id="userid-list">
+                <!-- User IDs will be displayed as badges here -->
+            </div>
+        </div>
+
+        <!-- User Details Container -->
+        <div class="users-container">
+            <div class="users-header">
+                <h2>User Details & Activity</h2>
+                <button class="refresh-btn" onclick="refreshUsers()">Refresh</button>
+            </div>
+            <div id="users-list">
+                <!-- User cards with details will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Logs Container -->
+        <div class="logs-container">
+            <div class="logs-header">
+                <h2>Live Activity Logs</h2>
+                <div>
+                    <button class="clear-btn" onclick="clearLogs()">Clear Logs</button>
+                    <button class="refresh-btn" onclick="fetchLogs()">Refresh</button>
+                </div>
+            </div>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <script>
+        const password = new URLSearchParams(window.location.search).get('password');
+        const logsContainer = document.getElementById('logs');
+        let logCount = 0;
+
+        // Fetch initial logs
+        async function fetchLogs() {
+            try {
+                const response = await fetch(`/admin/logs?password=${password}`);
+                const logs = await response.json();
+                
+                logsContainer.innerHTML = '';
+                logCount = 0;
+                
+                logs.forEach(log => addLog(log, false));
+            } catch (error) {
+                console.error('Error fetching logs:', error);
+            }
+        }
+
+        // Fetch system stats
+        async function fetchStats() {
+            try {
+                const response = await fetch(`/admin/stats?password=${password}`);
+                const stats = await response.json();
+                
+                document.getElementById('cpu-stat').textContent = stats.cpu_percent.toFixed(1) + '%';
+                document.getElementById('memory-stat').textContent = stats.memory_percent.toFixed(1) + '%';
+                document.getElementById('disk-stat').textContent = stats.disk_percent.toFixed(1) + '%';
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        }
+
+        // Fetch and display users
+        async function fetchUsers() {
+            try {
+                const response = await fetch(`/admin/users?password=${password}`);
+                const data = await response.json();
+                
+                document.getElementById('userid-total').textContent = data.total_users;
+                
+                const useridList = document.getElementById('userid-list');
+                useridList.innerHTML = '';
+                
+                data.users.forEach(user => {
+                    const badge = document.createElement('div');
+                    badge.className = 'userid-badge';
+                    badge.textContent = user.user_id;
+                    badge.title = `IP: ${user.ip} | Last: ${user.last_seen}`;
+                    useridList.appendChild(badge);
+                });
+                
+                const usersList = document.getElementById('users-list');
+                usersList.innerHTML = '';
+                
+                data.users.forEach(user => {
+                    const userCard = document.createElement('div');
+                    userCard.className = 'user-card';
+                    userCard.innerHTML = `
+                        <div class="user-id">${user.user_id}</div>
+                        <div class="user-info">IP: ${user.ip}</div>
+                        <div class="user-info">Last: ${user.last_seen}</div>
+                    `;
+                    usersList.appendChild(userCard);
+                });
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        // Add log entry to UI
+        function addLog(log, animate = true) {
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry info';
+            
+            let message = log.message;
+            
+            if (message.includes('✅') || message.includes('SUCCESS')) {
+                logEntry.classList.add('success');
+            } else if (message.includes('❌') || message.includes('FAILED') || message.includes('ERROR')) {
+                logEntry.classList.add('error');
+            } else if (message.includes('🆕') || message.includes('NEW_USER')) {
+                logEntry.classList.add('new-user');
+            }
+            
+            message = highlightLogMessage(message);
+            
+            logEntry.innerHTML = `
+                <span class="log-timestamp">${log.timestamp}</span>
+                <span class="log-message">${message}</span>
+            `;
+            
+            logsContainer.insertBefore(logEntry, logsContainer.firstChild);
+            
+            logCount++;
+            document.getElementById('log-count').textContent = logCount;
+            
+            if (logsContainer.children.length > 150) {
+                logsContainer.removeChild(logsContainer.lastChild);
+            }
+        }
+
+        // Highlight specific parts of log messages
+        function highlightLogMessage(message) {
+            message = message.replace(/USER: ([^\s|]+)/g, 'USER: <span class="highlight-user">$1</span>');
+            message = message.replace(/IP: (\d+\.\d+\.\d+\.\d+)/g, 'IP: <span class="highlight-ip">$1</span>');
+            message = message.replace(/STATUS: ([^\s|]+)/g, 'STATUS: <span class="highlight-status">$1</span>');
+            return message;
+        }
+
+        // Refresh users list
+        function refreshUsers() {
+            fetchUsers();
+        }
+
+        // Clear logs
+        function clearLogs() {
+            logsContainer.innerHTML = '';
+            logCount = 0;
+            document.getElementById('log-count').textContent = '0';
+        }
+
+        // Server-Sent Events for real-time updates
+        const eventSource = new EventSource(`/admin/stream?password=${password}`);
+        
+        eventSource.onmessage = function(event) {
+            const log = JSON.parse(event.data);
+            addLog(log, true);
+            
+            if (log.message.includes('🆕 NEW_USER')) {
+                setTimeout(fetchUsers, 1000);
+            }
+        };
+
+        eventSource.onerror = function(error) {
+            console.error('SSE Error:', error);
+            setTimeout(() => {
+                location.reload();
+            }, 5000);
+        };
+
+        // Initial load
+        fetchLogs();
+        fetchStats();
+        fetchUsers();
+
+        // Update stats every 5 seconds
+        setInterval(fetchStats, 5000);
+
+        // Refresh users list every 30 seconds
+        setInterval(fetchUsers, 30000);
+    </script>
+</body>
+</html>

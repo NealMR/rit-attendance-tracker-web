@@ -4,17 +4,19 @@ __pycache__/
 *$py.class
 *.so
 .Python
-env/
 venv/
-.env
+env/
+ENV/
 
 # Flask
 instance/
 .webassets-cache
 
-# IDE
+# IDEs
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
@@ -22,3 +24,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Chrome Driver
+chromedriver*
